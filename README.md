@@ -16,7 +16,6 @@ Currently `loicmahieu/alpine-nginx` is only published on Quay.io as automated bu
 - [v1.9.4](https://github.com/LoicMahieu/alpine-nginx/releases/tag/v1.9.4)
 - [v1.8.0](https://github.com/LoicMahieu/alpine-nginx/releases/tag/v1.8.0)
 - [v1.7.12](https://github.com/LoicMahieu/alpine-nginx/releases/tag/v1.7.12)
-- [v1.6.3](https://github.com/LoicMahieu/alpine-nginx/releases/tag/v1.6.3)
 
 # Examples
 ```
