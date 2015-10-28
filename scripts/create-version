@@ -19,3 +19,10 @@ git tag "v$VERSION"
 # Checkout master and forget the build branch
 git checkout master
 git branch -D "tmp_build_$VERSION"
+
+# Create latest
+cat Dockerfile | sed "s,NGINX_VERSION nginx-.*,NGINX_VERSION nginx-$VERSION," > Dockerfile.tmp
+mv Dockerfile.tmp Dockerfile
+git add Dockerfile
+git commit -m "Latest: $VERSION"
+
