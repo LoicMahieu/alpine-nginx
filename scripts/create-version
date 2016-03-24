@@ -2,27 +2,34 @@
 
 VERSION=$1
 
+writeDockerfile () {
+  # Change nginx version in Dockerfile
+  cat Dockerfile | sed "s,NGINX_VERSION nginx-.*,NGINX_VERSION nginx-$VERSION," > Dockerfile.tmp
+  mv Dockerfile.tmp Dockerfile
+}
+
+writeREADME () {
+  cat README.md | sed 's/tags:/tags:\
+- [v'$VERSION'](https:\/\/github.com\/LoicMahieu\/alpine-nginx\/releases\/tag\/v'$VERSION')/g'  > README.md.tmp
+  mv README.md.tmp README.md
+}
+
 # Create orphan branch for create tag
 git checkout --orphan "tmp_build_$VERSION"
 
-# Change nginx version in Dockerfile
-cat Dockerfile | sed "s,NGINX_VERSION nginx-.*,NGINX_VERSION nginx-$VERSION," > Dockerfile.tmp
-mv Dockerfile.tmp Dockerfile
+writeDockerfile
+writeREADME
 
-# Commit Dockerfile
-git add Dockerfile
+git add Dockerfile README.md
 git commit -m "v$VERSION"
-
-# Git tag
 git tag "v$VERSION"
 
 # Checkout master and forget the build branch
 git checkout master
 git branch -D "tmp_build_$VERSION"
 
-# Create latest
-cat Dockerfile | sed "s,NGINX_VERSION nginx-.*,NGINX_VERSION nginx-$VERSION," > Dockerfile.tmp
-mv Dockerfile.tmp Dockerfile
-git add Dockerfile
-git commit -m "Latest: $VERSION"
+writeDockerfile
+writeREADME
 
+git add Dockerfile README.md
+git commit -m "Latest: $VERSION"
