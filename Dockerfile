@@ -2,7 +2,7 @@ FROM alpine:3.2
 
 MAINTAINER Loïc Mahieu <mahieuloic@gmail.com>
 
-ENV NGINX_VERSION nginx-1.9.9
+ENV NGINX_VERSION nginx-1.9.10
 
 RUN apk --update add openssl-dev pcre-dev zlib-dev wget build-base && \
     mkdir -p /tmp/src && \
